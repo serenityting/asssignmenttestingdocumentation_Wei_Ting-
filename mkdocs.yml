@@ -1,0 +1,15 @@
+site_name: Genetic Data Processing Workflow
+
+nav:
+  - Home: index.md
+  - Pipeline Overview: overview.md
+  - Data Collection: data_collection.md
+  - Data Processing: data_processing.md
+  - Variant Analysis: variant_analysis.md
+  - Results & Interpretation: results.md
+  - API & References:
+      - Functions: functions.md
+
+plugins:
+  - search
+  - mkdocstrings
