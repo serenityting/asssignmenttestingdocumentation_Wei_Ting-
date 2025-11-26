@@ -1,0 +1,114 @@
+//Genetics database matching flow diagram
+
+// Main function
+function main():
+    samples = get_sample_list()
+    database = load_reference_database()
+
+    for sample in samples:
+        // Step 1: Collect raw data
+        raw_data = collect_data(sample)
+        save_data(raw_data, 'raw_storage')
+
+        // Step 2: Convert raw data format if needed
+        converted_data = convert_format(raw_data)
+        save_data(converted_data, 'converted_data_storage')
+
+        // Step 3: Clean and trim data
+        cleaned_data = clean_data(converted_data)
+        save_data(cleaned_data, 'cleaned_data_storage')
+
+        // Step 4: Align reads to reference genome
+        aligned_data = align_reads(cleaned_data)
+        save_data(aligned_data, 'aligned_data_storage')
+
+        // Step 5: Call variants
+        variants = call_variants(aligned_data)
+        save_data(variants, 'variant_data_storage')
+
+        // Step 6: Export variants to VCF
+        vcf_files = export_vcf(variants)
+        save_data(vcf_files, 'vcf_storage')
+
+        // Step 7: Annotate variants
+        annotated_variants = annotate_variants(vcf_files)
+        save_data(annotated_variants, 'annotated_variants_storage')
+
+        // Step 8: Filter variants based on criteria
+        filtered_variants = filter_variants(annotated_variants)
+        save_data(filtered_variants, 'filtered_variants_storage')
+
+        // Step 9: Match variants with database
+        matched_table = match_with_database(filtered_variants, database)
+        save_matched_result(matched_table)
+
+        // Step 10: Review and interpret results
+        review_results(matched_table)
+
+        // Optional: Feedback / Reprocessing based on review
+        // (Not included here as per latest update)
+    end for
+end function
+
+// Subfunctions
+function collect_data(sample):
+    data = retrieve_data_from(sample)
+    return data
+
+function convert_format(raw_data):
+    converted_data = convert_to_standard_format(raw_data)
+    return converted_data
+
+function clean_data(converted_data):
+    cleaned_data = remove_noise_and_errors(converted_data)
+    return cleaned_data
+
+function align_reads(cleaned_data):
+    aligned_data = perform_alignment(cleaned_data, method='BWA/Bowtie2')
+    return aligned_data
+
+function call_variants(aligned_data):
+    variants = detect_variants(aligned_data, method='GATK/FreeBayes')
+    return variants
+
+function export_vcf(variants):
+    vcf_files = generate_vcf_files(variants)
+    return vcf_files
+
+function annotate_variants(vcf_files):
+    annotated = perform_annotation(vcf_files)
+    return annotated
+
+function filter_variants(annotated):
+    filtered = apply_filters(annotated, criteria='quality, frequency, impact')
+    return filtered
+
+function match_with_database(filtered_variants, database):
+    matched_results = compare_with_database(filtered_variants, database)
+    return matched_results
+
+function save_data(data, storage_location):
+    store_in(storage_location, data)
+
+function save_matched_result(matched_table):
+    store_in('matched_results_storage', matched_table)
+
+function review_results(matched_table):
+    analyze_and_interpret(matched_table)
+
+
+
+//External function
+1. Sequencing Data Generation (sequence_data)
+   
+2. Alignment Tools (align_reads)
+   Run in BWA, Bowtie2, or other alignment software.
+   
+3. Variant Calling (call_variants)
+    Use GATK, FreeBayes, or other variant callers.
+   
+4. Annotation Tools (annotate_variants)
+   Use external annotation databases: ANNOVAR, SnpEff.
+   
+5. Comparison with External Databases (match_with_database)
+   - Query external databases: dbSNP, ClinVar, or custom variant databases.
