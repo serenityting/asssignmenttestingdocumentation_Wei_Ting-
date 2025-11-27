@@ -2,7 +2,6 @@ site_name: Genetic Data Processing Workflow
 
 nav:
   - Home: index.md
-          docs/graphviz.png
   - Pipeline Overview: overview.md
   - Data Collection: data_collection.md
   - Data Processing: data_processing.md
